@@ -1,4 +1,10 @@
-import { pgTable, uuid, varchar, numeric, text, timestamp } from 'drizzle-orm/pg-core'
+import { pgTable, uuid, varchar, numeric, text, timestamp, index, customType } from 'drizzle-orm/pg-core'
+
+const tsvector = customType<{ data: string }>({
+  dataType() {
+    return 'tsvector'
+  },
+})
 
 export const assets = pgTable('assets', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -11,7 +17,11 @@ export const assets = pgTable('assets', {
   notes: text('notes'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
-})
+  searchVector: tsvector('search_vector'),
+}, (table) => [
+  index('assets_status_created_at_idx').on(table.status, table.createdAt),
+  index('assets_search_vector_gin_idx').using('gin', table.searchVector),
+])
 
 export type Asset = typeof assets.$inferSelect
 export type NewAsset = typeof assets.$inferInsert
