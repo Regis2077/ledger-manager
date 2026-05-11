@@ -8,6 +8,13 @@
       "when": 1778540810822,
       "tag": "0000_many_captain_marvel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1778542104754,
+      "tag": "0001_freezing_stranger",
+      "breakpoints": true
     }
   ]
 }

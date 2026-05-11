@@ -1,0 +1,1 @@
+ALTER TABLE "assets" ALTER COLUMN "ticker" DROP NOT NULL;

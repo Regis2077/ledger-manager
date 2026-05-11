@@ -9,7 +9,7 @@ const tsvector = customType<{ data: string }>({
 export const assets = pgTable('assets', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name', { length: 255 }).notNull(),
-  ticker: varchar('ticker', { length: 20 }).notNull(),
+  ticker: varchar('ticker', { length: 20 }),
   type: varchar('type', { length: 50 }).notNull(),
   value: numeric('value', { precision: 15, scale: 2 }).notNull(),
   currency: varchar('currency', { length: 3 }).notNull().default('BRL'),
